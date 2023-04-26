@@ -15,6 +15,7 @@ rel="shortcut icon" type="image/x-icon">
         var numbers = document.getElementById("numbers").checked;
         var symbols = document.getElementById("symbols").checked;
         var kr = document.getElementById("kr").checked;
+        var hieroglyph = document.getElementById("hieroglyph").checked;
         var charset = "";
         if (lowercase) {
           charset += "abcdefghijklmnopqrstuvwxyz";
@@ -30,6 +31,9 @@ rel="shortcut icon" type="image/x-icon">
         }
         if (kr) {
           charset += "ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹ호ㅓㅏㅣㅋㅌㅊㅍㅠㅜㅡ";
+        }
+        if (hieroglyph) {
+          charset += "숯숱숲숴쉈쉐쉑쉔쉘쉠쉥쉬쉭쉰쉴쉼쉽쉿슁슈슉슐슘슛슝스슥슨슬슭슴습슷승시식신싣실싫심십싯싱싶싸싹싻싼쌀쌈쌉쌌쌍쌓쌔쌕쌘쌜쌤쌥쌨쌩썅써썩썬썰썲썸썹썼썽쎄쎈쎌쏀쏘쏙쏜쏟쏠쏢쏨쏩쏭쏴쏵쏸쐈쐐쐤쐬쐰";
         }
         var password = "";
         for (var i = 0; i < length; i++) {
@@ -76,6 +80,9 @@ rel="shortcut icon" type="image/x-icon">
       <br>
       <label for="kr">한글:</label>
       <input type="checkbox" id="kr" checked="">
+      <br>
+      <label for="hieroglyph">占쏙옙:</label>
+      <input type="checkbox" id="hieroglyph" checked="">
       <br>
       <label for="password">비밀번호:</label>
       <input type="text" id="password" readonly="">
