@@ -43,7 +43,7 @@ rel="shortcut icon" type="image/x-icon">
         document.getElementById("copy").disabled = false;
       }
 
-  function copyPassword() {
+function copyPassword() {
   var password = document.getElementById("password").value;
   if (!navigator.clipboard) {
     // 이전 버전의 브라우저에서는 execCommand() 함수를 사용합니다.
@@ -55,15 +55,28 @@ rel="shortcut icon" type="image/x-icon">
     document.body.removeChild(textarea);
     alert("비밀번호가 클립보드에 복사되었습니다.");
   } else {
-    navigator.clipboard.writeText(password)
-      .then(() => {
-        alert("비밀번호가 클립보드에 복사되었습니다.");
-      })
-      .catch(err => {
-        console.error('클립보드 복사 실패: ', err);
-      });
+    // iOS에서는 navigator.clipboard.writeText()가 Promise를 반환하지 않습니다.
+    // 따라서 별도의 처리가 필요합니다.
+    if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+      var range = document.createRange();
+      range.selectNodeContents(document.getElementById("password"));
+      var selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand("copy");
+      alert("비밀번호가 클립보드에 복사되었습니다.");
+    } else {
+      navigator.clipboard.writeText(password)
+        .then(() => {
+          alert("비밀번호가 클립보드에 복사되었습니다.");
+        })
+        .catch(err => {
+          console.error('클립보드 복사 실패: ', err);
+        });
+    }
   }
 }
+
     </script>
   </head>
   <body>
